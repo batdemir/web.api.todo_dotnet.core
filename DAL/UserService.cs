@@ -14,56 +14,56 @@ namespace web.api.todo.DAL {
             this.context = context;
         }
 
-        public ResponseModel<List<User>> Get() {
-            ResponseModel<List<User>> response = new ResponseModel<List<User>>();
-            List<User> model = new BLLUser(context).Get();
+        public ResponseModel<List<Person>> Get() {
+            ResponseModel<List<Person>> response = new ResponseModel<List<Person>>();
+            List<Person> model = new BLLUser(context).Get();
             if (model == null) {
-                response.status = ResponseModel<List<User>>.Status.fail;
+                response.status = ResponseModel<List<Person>>.Status.fail;
                 response.message = "Bir sorun oluştu.";
             } else if (model != null && model.Count == 0) {
-                response.status = ResponseModel<List<User>>.Status.notFound;
+                response.status = ResponseModel<List<Person>>.Status.notFound;
                 response.message = "Kayıt bulunamadı.";
             } else {
-                response.status = ResponseModel<List<User>>.Status.success;
+                response.status = ResponseModel<List<Person>>.Status.success;
                 response.message = "Başarılı";
                 response.model = model;
             }
             return response;
         }
 
-        public ResponseModel<User> GetById(Guid userId) {
-            ResponseModel<User> response = new ResponseModel<User>();
+        public ResponseModel<Person> GetById(Guid userId) {
+            ResponseModel<Person> response = new ResponseModel<Person>();
             if (new BLLUser(context).CheckDataExist(userId)) {
-                response.status = ResponseModel<User>.Status.notFound;
+                response.status = ResponseModel<Person>.Status.notFound;
                 response.message = "Kullanıcı bulunamadı.";
             } else {
-                response.status = ResponseModel<User>.Status.success;
+                response.status = ResponseModel<Person>.Status.success;
                 response.message = "Başarılı";
                 response.model = new BLLUser(context).GetById(userId);
             }
             return response;
         }
 
-        public ResponseModel<User> Insert(User model) {
-            ResponseModel<User> response = new ResponseModel<User>();
+        public ResponseModel<Person> Insert(Person model) {
+            ResponseModel<Person> response = new ResponseModel<Person>();
             if (!new BLLUser(context).CheckDataExist(model.Id)) {
-                response.status = ResponseModel<User>.Status.duplicate;
+                response.status = ResponseModel<Person>.Status.duplicate;
                 response.message = "Zaten böyle bir kullanıcı bulunmaktadır.";
             } else {
-                response.status = ResponseModel<User>.Status.success;
+                response.status = ResponseModel<Person>.Status.success;
                 response.message = "Başarılı";
                 response.model = new BLLUser(context).Insert(model);
             }
             return response;
         }
 
-        public ResponseModel<User> Update(User model) {
-            ResponseModel<User> response = new ResponseModel<User>();
+        public ResponseModel<Person> Update(Person model) {
+            ResponseModel<Person> response = new ResponseModel<Person>();
             if (new BLLUser(context).CheckDataExist(model.Id)) {
-                response.status = ResponseModel<User>.Status.notFound;
+                response.status = ResponseModel<Person>.Status.notFound;
                 response.message = "Kullanıcı bulunamadı.";
             } else {
-                response.status = ResponseModel<User>.Status.success;
+                response.status = ResponseModel<Person>.Status.success;
                 response.message = "Başarılı";
                 response.model = new BLLUser(context).Update(model);
             }

@@ -18,22 +18,22 @@ namespace web.api.todo.Controllers {
         }
 
         [HttpGet]
-        public ActionResult<ResponseModel<List<User>>> Get() {
+        public ActionResult<ResponseModel<List<Person>>> Get() {
             return new UserService(context).Get();
         }
 
         [HttpGet("{id}")]
-        public ActionResult<ResponseModel<User>> Get(Guid id) {
+        public ActionResult<ResponseModel<Person>> Get(Guid id) {
             return new UserService(context).GetById(id);
         }
 
         [HttpPost]
-        public ActionResult<ResponseModel<User>> Post([FromBody]User value) {
+        public ActionResult<ResponseModel<Person>> Post([FromBody]Person value) {
             return new UserService(context).Insert(value);
         }
 
         [HttpPut("{id}")]
-        public ActionResult<ResponseModel<User>> Put([FromBody]User value) {
+        public ActionResult<ResponseModel<Person>> Put([FromBody]Person value) {
             return new UserService(context).Update(value);
         }
 

@@ -18,22 +18,22 @@ namespace web.api.todo.BLL {
             return Equals(context.User.Where(user => user.Id == userId).FirstOrDefault(), null);
         }
 
-        public List<User> Get() {
+        public List<Person> Get() {
             return context.User.ToList();
         }
 
-        public User GetById(Guid userId) {
+        public Person GetById(Guid userId) {
             return context.User.Where(user => user.Id.Equals(userId)).FirstOrDefault();
         }
 
-        public User Insert(User model) {
+        public Person Insert(Person model) {
             context.User.Add(model);
             context.SaveChanges();
             return model;
         }
 
-        public User Update(User model) {
-            var local = context.Set<User>().Local.FirstOrDefault(entry => entry.Id.Equals(model.Id));
+        public Person Update(Person model) {
+            var local = context.Set<Person>().Local.FirstOrDefault(entry => entry.Id.Equals(model.Id));
             if (local != null) {
                 context.Entry(local).State = EntityState.Detached;
             }

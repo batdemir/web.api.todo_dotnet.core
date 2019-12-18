@@ -7,13 +7,13 @@ namespace web.api.todo.DAL {
 
     public interface IUserService {
 
-        ResponseModel<List<User>> Get();
+        ResponseModel<List<Person>> Get();
 
-        ResponseModel<User> GetById(Guid userId);
+        ResponseModel<Person> GetById(Guid userId);
 
-        ResponseModel<User> Insert(User model);
+        ResponseModel<Person> Insert(Person model);
 
-        ResponseModel<User> Update(User model);
+        ResponseModel<Person> Update(Person model);
 
         ResponseModel<bool> Delete(Guid userId);
 

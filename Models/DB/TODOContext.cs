@@ -13,7 +13,7 @@ namespace web.api.todo.Models.DB {
 
         public virtual DbSet<Todo> Todo { get; set; }
         public virtual DbSet<TodoList> TodoList { get; set; }
-        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Person> User { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
             if (!optionsBuilder.IsConfigured) {
@@ -34,7 +34,7 @@ namespace web.api.todo.Models.DB {
                 entity.Property(e => e.Id).ValueGeneratedNever();
             });
 
-            modelBuilder.Entity<User>(entity => {
+            modelBuilder.Entity<Person>(entity => {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Name)
