@@ -11,7 +11,6 @@ namespace web.api.todo {
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder => {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseUrls("http://localhost:1994");
                 });
     }
 }

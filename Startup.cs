@@ -19,6 +19,13 @@ namespace web.api.todo {
         public void ConfigureServices(IServiceCollection services) {
             services.AddControllers().AddNewtonsoftJson();
             services.AddDbContext<TODOContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddSwaggerGen(c => {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo {
+                    Version = "v1",
+                    Title = "Todo API",
+                    Description = "Todo API with ASP.NET Core 3.0"
+                });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
@@ -34,6 +41,11 @@ namespace web.api.todo {
 
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Todo API V1");
             });
         }
     }
