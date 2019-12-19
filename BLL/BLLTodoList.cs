@@ -17,7 +17,7 @@ namespace web.api.todo.BLL {
 
         public List<CustomTodoList> Get() {
             return context.TodoList
-                .Join(context.User, todoList => todoList.UserId, user => user.Id, (todoList, user) => new { todoList, user })
+                .Join(context.Person, todoList => todoList.UserId, user => user.Id, (todoList, user) => new { todoList, user })
                 .Join(context.Todo, todoList2 => todoList2.todoList.TodoId, todo => todo.Id, (todoList2, todo) => new { todoList2, todo })
                 .Select(select => new CustomTodoList {
                     Id = select.todoList2.todoList.Id,
@@ -31,7 +31,7 @@ namespace web.api.todo.BLL {
 
         public List<CustomTodoList> GetByTodo(Guid todoId) {
             return context.TodoList
-                .Join(context.User, todoList => todoList.UserId, user => user.Id, (todoList, user) => new { todoList, user })
+                .Join(context.Person, todoList => todoList.UserId, user => user.Id, (todoList, user) => new { todoList, user })
                 .Join(context.Todo, todoList2 => todoList2.todoList.TodoId, todo => todo.Id, (todoList2, todo) => new { todoList2, todo })
                 .Where(where => where.todoList2.todoList.TodoId.Equals(todoId))
                 .Select(select => new CustomTodoList {
@@ -45,7 +45,7 @@ namespace web.api.todo.BLL {
 
         public List<CustomTodoList> GetByUser(Guid userId) {
             return context.TodoList
-                .Join(context.User, todoList => todoList.UserId, user => user.Id, (todoList, user) => new { todoList, user })
+                .Join(context.Person, todoList => todoList.UserId, user => user.Id, (todoList, user) => new { todoList, user })
                 .Join(context.Todo, todoList2 => todoList2.todoList.TodoId, todo => todo.Id, (todoList2, todo) => new { todoList2, todo })
                 .Where(where => where.todoList2.todoList.UserId.Equals(userId))
                 .Select(select => new CustomTodoList {

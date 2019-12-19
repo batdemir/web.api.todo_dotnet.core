@@ -3,7 +3,7 @@ using web.api.todo.Models.DB;
 
 namespace web.api.todo.Models {
 
-    public class CustomTodoList : TodoList {
+    public class CustomTodoList :TodoList {
 
         public string UserName { get; set; }
 

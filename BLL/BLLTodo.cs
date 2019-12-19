@@ -34,7 +34,7 @@ namespace web.api.todo.BLL {
 
         public Todo Update(Todo model) {
             var local = context.Set<Todo>().Local.FirstOrDefault(entry => entry.Id.Equals(model.Id));
-            if (local != null) {
+            if(local != null) {
                 context.Entry(local).State = EntityState.Detached;
             }
             context.Entry(model).State = EntityState.Modified;

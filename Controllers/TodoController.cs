@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using web.api.todo.DAL;
-using web.api.todo.Models;
 using web.api.todo.Models.DB;
+using web.api.todo.Models.Response;
 
 namespace web.api.todo.Controllers {
 
     [ApiController]
     [Route("[controller]")]
-    public class TodoController : ControllerBase {
+    public class TodoController :ControllerBase {
 
         private TODOContext context;
 
