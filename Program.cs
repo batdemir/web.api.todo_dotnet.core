@@ -11,6 +11,7 @@ namespace web.api.todo {
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder => {
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.UseIIS();
                 });
     }
 }
