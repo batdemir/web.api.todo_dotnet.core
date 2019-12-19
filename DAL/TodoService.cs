@@ -18,13 +18,13 @@ namespace web.api.todo.DAL {
             ResponseModel<List<Todo>> response = new ResponseModel<List<Todo>>();
             List<Todo> model = new BLLTodo(context).Get();
             if(model == null) {
-                response.status = ResponseStatus.fail;
+                response.status = ResponseStatus.FAIL;
                 response.message = "Bir sorun oluştu.";
             } else if(model != null && model.Count == 0) {
-                response.status = ResponseStatus.notFound;
+                response.status = ResponseStatus.NOT_FOUND;
                 response.message = "Kayıt bulunamadı.";
             } else {
-                response.status = ResponseStatus.success;
+                response.status = ResponseStatus.SUCCESS;
                 response.message = "Başarılı";
                 response.model = model;
             }
@@ -34,10 +34,10 @@ namespace web.api.todo.DAL {
         public ResponseModel<Todo> GetById(Guid todoId) {
             ResponseModel<Todo> response = new ResponseModel<Todo>();
             if(new BLLTodo(context).CheckDataExist(todoId)) {
-                response.status = ResponseStatus.notFound;
+                response.status = ResponseStatus.NOT_FOUND;
                 response.message = "Todo bulunamadı.";
             } else {
-                response.status = ResponseStatus.success;
+                response.status = ResponseStatus.SUCCESS;
                 response.message = "Başarılı";
                 response.model = new BLLTodo(context).GetById(todoId);
             }
@@ -47,10 +47,10 @@ namespace web.api.todo.DAL {
         public ResponseModel<Todo> Insert(Todo model) {
             ResponseModel<Todo> response = new ResponseModel<Todo>();
             if(!new BLLTodo(context).CheckDataExist(model.Id)) {
-                response.status = ResponseStatus.duplicate;
+                response.status = ResponseStatus.DUPLICATE;
                 response.message = "Zaten böyle bir Todo bulunmaktadır.";
             } else {
-                response.status = ResponseStatus.success;
+                response.status = ResponseStatus.SUCCESS;
                 response.message = "Başarılı";
                 response.model = new BLLTodo(context).Insert(model);
             }
@@ -60,10 +60,10 @@ namespace web.api.todo.DAL {
         public ResponseModel<Todo> Update(Todo model) {
             ResponseModel<Todo> response = new ResponseModel<Todo>();
             if(new BLLTodo(context).CheckDataExist(model.Id)) {
-                response.status = ResponseStatus.notFound;
+                response.status = ResponseStatus.NOT_FOUND;
                 response.message = "Todo bulunamadı.";
             } else {
-                response.status = ResponseStatus.success;
+                response.status = ResponseStatus.SUCCESS;
                 response.message = "Başarılı";
                 response.model = new BLLTodo(context).Update(model);
             }
@@ -73,10 +73,10 @@ namespace web.api.todo.DAL {
         public ResponseModel<bool> Delete(Guid todoId) {
             ResponseModel<bool> response = new ResponseModel<bool>();
             if(new BLLTodo(context).CheckDataExist(todoId)) {
-                response.status = ResponseStatus.notFound;
+                response.status = ResponseStatus.NOT_FOUND;
                 response.message = "Todo bulunamadı.";
             } else {
-                response.status = ResponseStatus.success;
+                response.status = ResponseStatus.SUCCESS;
                 response.message = "Başarılı";
                 response.model = new BLLTodo(context).Delete(todoId);
             }

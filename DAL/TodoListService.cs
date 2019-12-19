@@ -19,13 +19,13 @@ namespace web.api.todo.DAL {
             ResponseModel<List<CustomTodoList>> response = new ResponseModel<List<CustomTodoList>>();
             List<CustomTodoList> model = new BLLTodoList(context).Get();
             if(model == null) {
-                response.status = ResponseStatus.fail;
+                response.status = ResponseStatus.FAIL;
                 response.message = "Bir sorun oluştu.";
             } else if((model != null && model.Count == 0)) {
-                response.status = ResponseStatus.notFound;
+                response.status = ResponseStatus.NOT_FOUND;
                 response.message = "Kayıt bulunamadı.";
             } else {
-                response.status = ResponseStatus.success;
+                response.status = ResponseStatus.SUCCESS;
                 response.message = "Başarılı";
             }
             response.model = model;
@@ -36,13 +36,13 @@ namespace web.api.todo.DAL {
             ResponseModel<List<CustomTodoList>> response = new ResponseModel<List<CustomTodoList>>();
             List<CustomTodoList> model = new BLLTodoList(context).GetByTodo(todoId);
             if(model == null) {
-                response.status = ResponseStatus.fail;
+                response.status = ResponseStatus.FAIL;
                 response.message = "Bir sorun oluştu.";
             } else if((model != null && model.Count == 0)) {
-                response.status = ResponseStatus.notFound;
+                response.status = ResponseStatus.NOT_FOUND;
                 response.message = "Bu Todo'ya ait kayıt bulunamadı.";
             } else {
-                response.status = ResponseStatus.success;
+                response.status = ResponseStatus.SUCCESS;
                 response.message = "Başarılı";
             }
             response.model = model;
@@ -53,13 +53,13 @@ namespace web.api.todo.DAL {
             ResponseModel<List<CustomTodoList>> response = new ResponseModel<List<CustomTodoList>>();
             List<CustomTodoList> model = new BLLTodoList(context).GetByUser(userId);
             if(model == null) {
-                response.status = ResponseStatus.fail;
+                response.status = ResponseStatus.FAIL;
                 response.message = "Bir sorun oluştu.";
             } else if((model != null && model.Count == 0)) {
-                response.status = ResponseStatus.notFound;
+                response.status = ResponseStatus.NOT_FOUND;
                 response.message = "Bu User'a ait kayıt bulunamadı.";
             } else {
-                response.status = ResponseStatus.success;
+                response.status = ResponseStatus.SUCCESS;
                 response.message = "Başarılı";
             }
             response.model = model;

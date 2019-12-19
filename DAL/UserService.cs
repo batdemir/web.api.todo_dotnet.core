@@ -18,13 +18,13 @@ namespace web.api.todo.DAL {
             ResponseModel<List<Person>> response = new ResponseModel<List<Person>>();
             List<Person> model = new BLLUser(context).Get();
             if(model == null) {
-                response.status = ResponseStatus.fail;
+                response.status = ResponseStatus.FAIL;
                 response.message = "Bir sorun oluştu.";
             } else if(model != null && model.Count == 0) {
-                response.status = ResponseStatus.notFound;
+                response.status = ResponseStatus.NOT_FOUND;
                 response.message = "Kayıt bulunamadı.";
             } else {
-                response.status = ResponseStatus.success;
+                response.status = ResponseStatus.SUCCESS;
                 response.message = "Başarılı";
                 response.model = model;
             }
@@ -34,10 +34,10 @@ namespace web.api.todo.DAL {
         public ResponseModel<Person> GetById(Guid userId) {
             ResponseModel<Person> response = new ResponseModel<Person>();
             if(new BLLUser(context).CheckDataExist(userId)) {
-                response.status = ResponseStatus.notFound;
+                response.status = ResponseStatus.NOT_FOUND;
                 response.message = "Kullanıcı bulunamadı.";
             } else {
-                response.status = ResponseStatus.success;
+                response.status = ResponseStatus.SUCCESS;
                 response.message = "Başarılı";
                 response.model = new BLLUser(context).GetById(userId);
             }
@@ -47,10 +47,10 @@ namespace web.api.todo.DAL {
         public ResponseModel<Person> Insert(Person model) {
             ResponseModel<Person> response = new ResponseModel<Person>();
             if(!new BLLUser(context).CheckDataExist(model.Id)) {
-                response.status = ResponseStatus.duplicate;
+                response.status = ResponseStatus.DUPLICATE;
                 response.message = "Zaten böyle bir kullanıcı bulunmaktadır.";
             } else {
-                response.status = ResponseStatus.success;
+                response.status = ResponseStatus.SUCCESS;
                 response.message = "Başarılı";
                 response.model = new BLLUser(context).Insert(model);
             }
@@ -60,10 +60,10 @@ namespace web.api.todo.DAL {
         public ResponseModel<Person> Update(Person model) {
             ResponseModel<Person> response = new ResponseModel<Person>();
             if(new BLLUser(context).CheckDataExist(model.Id)) {
-                response.status = ResponseStatus.notFound;
+                response.status = ResponseStatus.NOT_FOUND;
                 response.message = "Kullanıcı bulunamadı.";
             } else {
-                response.status = ResponseStatus.success;
+                response.status = ResponseStatus.SUCCESS;
                 response.message = "Başarılı";
                 response.model = new BLLUser(context).Update(model);
             }
@@ -73,10 +73,10 @@ namespace web.api.todo.DAL {
         public ResponseModel<bool> Delete(Guid userId) {
             ResponseModel<bool> response = new ResponseModel<bool>();
             if(new BLLUser(context).CheckDataExist(userId)) {
-                response.status = ResponseStatus.notFound;
+                response.status = ResponseStatus.NOT_FOUND;
                 response.message = "Kullanıcı bulunamadı.";
             } else {
-                response.status = ResponseStatus.success;
+                response.status = ResponseStatus.SUCCESS;
                 response.message = "Başarılı";
                 response.model = new BLLUser(context).Delete(userId);
             }
