@@ -1,19 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using web.api.todo.BLL;
 using web.api.todo.DAL;
+using web.api.todo.Models;
 using web.api.todo.Models.DB;
 using web.api.todo.Models.Mapper;
 using web.api.todo.Models.Response;
 
 namespace web.api.todo.Controllers {
 
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
-    public class UserController :ControllerBase {
+    public class UserController : ControllerBase {
 
         private TODOContext context;
         private readonly IMapper mapper;
@@ -46,6 +53,13 @@ namespace web.api.todo.Controllers {
         [HttpDelete("{id}")]
         public ActionResult<ResponseModel<bool>> Delete(Guid id) {
             return new UserService(context).Delete(id);
+        }
+
+        //Testing auth login
+        [AllowAnonymous]
+        [HttpGet("login")]
+        public ActionResult<string> Login(string userName, string password) {
+            return Ok(new UserService(context).GetToken(userName, password));
         }
 
         //Testing mapper

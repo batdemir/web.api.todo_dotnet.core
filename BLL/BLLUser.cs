@@ -34,13 +34,15 @@ namespace web.api.todo.BLL {
 
         public Person Update(Person model) {
             var local = context.Set<Person>().Local.FirstOrDefault(entry => entry.Id.Equals(model.Id));
-            if(local != null) {
+            if (local != null) {
                 context.Entry(local).State = EntityState.Detached;
             }
             context.Entry(model).State = EntityState.Modified;
             context.SaveChanges();
             return model;
         }
+
+        public Person ValidUser(string userName, string password) => context.Person.Where(user => String.Equals(user.Name, userName) && String.Equals(user.Name, password)).FirstOrDefault();
 
         public bool Delete(Guid userId) {
             context.Person.Remove(GetById(userId));
