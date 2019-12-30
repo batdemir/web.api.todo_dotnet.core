@@ -93,6 +93,8 @@ namespace web.api.todo {
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseHttpsRedirection();
+
             app.UseRouting();
 
             app.UseAuthentication();
