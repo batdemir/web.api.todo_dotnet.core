@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using web.api.todo.DAL;
 using web.api.todo.Models;
@@ -8,9 +9,10 @@ using web.api.todo.Models.Response;
 
 namespace web.api.todo.Controllers {
 
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
-    public class TodoListController :ControllerBase {
+    public class TodoListController : ControllerBase {
 
         private TODOContext context;
 
